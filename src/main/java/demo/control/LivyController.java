@@ -1,15 +1,29 @@
 package demo.control;
 
+import demo.bean.SubmitRequest;
 import demo.service.LivyService;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 import org.apache.livy.rsc.ContextInfo;
+import org.apache.livy.rsc.ReplJobResults;
+import org.apache.livy.service.LivyRSCClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 public class LivyController {
+
+  private static final Logger logger = LoggerFactory.getLogger(LivyService.class);
+
+
+  private Map<String, LivyRSCClient> clients = new ConcurrentHashMap<>();
 
   @Autowired
   private LivyService livyService;
@@ -17,5 +31,57 @@ public class LivyController {
   @GetMapping("/livy")
   public Map<String, ContextInfo> getContextInfoMap() {
     return livyService.getRemoteServer().getRpcServer().getContextInfoMap();
+  }
+
+  @GetMapping("/livy/submit")
+  public Integer submit(@RequestBody SubmitRequest request) throws Exception {
+
+    Optional<LivyRSCClient> client = getLivyRSCClient(request.clientId);
+
+    if (client.isPresent()) {
+      return client.get().submitReplCode(request.code).get();
+    }
+
+    return null;
+  }
+
+  @GetMapping("/livy/statements")
+  public ReplJobResults statement(@RequestBody SubmitRequest request) throws Exception {
+
+    Optional<LivyRSCClient> client = getLivyRSCClient(request.clientId);
+
+    if (client.isPresent()) {
+      return client.get().getReplJobResults().get();
+    }
+
+    return null;
+  }
+
+  private Optional<LivyRSCClient> getLivyRSCClient(String clientId) throws Exception {
+    LivyRSCClient client = clients.get(clientId);
+
+    if (client == null) {
+      try {
+        ContextInfo info = livyService.getRemoteServer().getRpcServer().getContextInfoMap()
+            .get(clientId);
+
+        if (info == null) {
+          return Optional.empty();
+        }
+
+        LivyRSCClient rscClient = LivyRSCClient
+            .create(info.remoteAddress, info.remotePort, info.clientId);
+
+        clients.put(clientId, rscClient);
+        client = rscClient;
+
+      } catch (Exception ex) {
+        logger.error("", ex);
+        return Optional.empty();
+      }
+    }
+
+    return Optional.of(client);
+
   }
 }

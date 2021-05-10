@@ -16,7 +16,7 @@ public class LivyService {
   @PostConstruct
   public void init() throws Exception {
     logger.info("init livy service");
-    remoteServer = LivyRSCServer.run();
+    remoteServer = LivyRSCServer.create();
   }
 
   public LivyRSCServer getRemoteServer() {

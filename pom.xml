@@ -37,11 +37,11 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.apache.livy</groupId>
-      <artifactId>livy-remote</artifactId>
-      <version>${livy.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.livy</groupId>-->
+<!--      <artifactId>livy-remote</artifactId>-->
+<!--      <version>${livy.version}</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.apache.livy</groupId>
