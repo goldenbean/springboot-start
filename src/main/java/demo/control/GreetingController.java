@@ -1,5 +1,6 @@
-package demo;
+package demo.control;
 
+import demo.bean.Greeting;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;
