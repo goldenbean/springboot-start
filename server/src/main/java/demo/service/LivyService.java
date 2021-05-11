@@ -12,7 +12,7 @@ public class LivyService {
   private static final Logger logger = LoggerFactory.getLogger(LivyService.class);
 
   private LivyRSCServer remoteServer;
-
+  
   @PostConstruct
   public void init() throws Exception {
     logger.info("init livy service");
