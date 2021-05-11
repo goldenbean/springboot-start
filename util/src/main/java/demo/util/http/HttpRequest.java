@@ -2,7 +2,7 @@ package demo.util.http;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class HttpRequest {
 
@@ -12,7 +12,7 @@ public class HttpRequest {
 
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(url)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(JacksonConverterFactory.create())
         .client(httpClient.build())
         .build();
     return retrofit;
