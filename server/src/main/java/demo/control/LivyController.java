@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/livy")
 public class LivyController {
 
-  private static final Logger logger = LoggerFactory.getLogger(LivyService.class);
+  private static final Logger logger = LoggerFactory.getLogger(LivyController.class);
 
   private Map<String, LivyRSCClient> clients = new ConcurrentHashMap<>();
 
