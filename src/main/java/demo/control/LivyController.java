@@ -2,10 +2,12 @@ package demo.control;
 
 import demo.bean.SubmitRequest;
 import demo.service.LivyService;
+import demo.util.JsonUtil;
+import demo.util.http.RestResult;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
+import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
 import org.apache.livy.rsc.ContextInfo;
 import org.apache.livy.rsc.ReplJobResults;
 import org.apache.livy.service.LivyRSCClient;
@@ -13,27 +15,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/livy")
 public class LivyController {
 
   private static final Logger logger = LoggerFactory.getLogger(LivyService.class);
-
 
   private Map<String, LivyRSCClient> clients = new ConcurrentHashMap<>();
 
   @Autowired
   private LivyService livyService;
 
-  @GetMapping("/livy")
+  @GetMapping("/")
   public Map<String, ContextInfo> getContextInfoMap() {
     return livyService.getRemoteServer().getRpcServer().getContextInfoMap();
   }
 
-  @GetMapping("/livy/submit")
+  @PostMapping("/driver")
+  public RestResult driver(@RequestBody RemoteDriverAddress remoteDriverAddress) {
+    logger.info("Received: [{}]", JsonUtil.prettyPrint(remoteDriverAddress));
+    String ret = String.format("Received Remote Driver Address: [ %s ].",
+        JsonUtil.prettyPrint(remoteDriverAddress));
+    return RestResult.success(ret);
+  }
+
+  @GetMapping("/submit")
   public Integer submit(@RequestBody SubmitRequest request) throws Exception {
 
     Optional<LivyRSCClient> client = getLivyRSCClient(request.clientId);
@@ -45,7 +57,7 @@ public class LivyController {
     return null;
   }
 
-  @GetMapping("/livy/statements")
+  @GetMapping("/statements")
   public ReplJobResults statement(@RequestBody SubmitRequest request) throws Exception {
 
     Optional<LivyRSCClient> client = getLivyRSCClient(request.clientId);
