@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class BootMain {
+
   private static final Logger logger = LoggerFactory.getLogger(BootMain.class);
 
   public static void main(String[] args) {
