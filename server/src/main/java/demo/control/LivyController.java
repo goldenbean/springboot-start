@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
 import org.apache.livy.rsc.ContextInfo;
 import org.apache.livy.rsc.ReplJobResults;
-import org.apache.livy.service.LivyRSCClient;
+import livy.LivyRSCClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

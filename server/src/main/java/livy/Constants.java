@@ -1,4 +1,4 @@
-package org.apache.livy.service;
+package livy;
 
 public class Constants {
 

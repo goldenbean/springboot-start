@@ -1,3 +1,5 @@
+package livy;
+
 import demo.util.http.HttpRequest;
 import demo.util.http.RestResult;
 import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
