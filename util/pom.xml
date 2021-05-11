@@ -14,7 +14,7 @@
     <jackson.version>2.11.4</jackson.version>
     <slf4j.version>1.7.30</slf4j.version>
     <logback-classic-version>1.2.3</logback-classic-version>
-
+    <junit.version>4.12</junit.version>
   </properties>
 
   <dependencies>
@@ -78,8 +78,13 @@
     </dependency>
 
 
-
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <type>jar</type>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
 
