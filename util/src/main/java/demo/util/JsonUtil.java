@@ -14,6 +14,12 @@ public class JsonUtil {
       .enable(SerializationFeature.INDENT_OUTPUT);
 
   public static String prettyPrint(Object value) {
+    String json = toJson(value);
+    logger.info("\n{}\n", json);
+    return json;
+  }
+
+  public static String toJson(Object value) {
     try {
       return mapper.writeValueAsString(value);
     } catch (JsonProcessingException ex) {
@@ -21,5 +27,6 @@ public class JsonUtil {
       return "";
     }
   }
+
 
 }
