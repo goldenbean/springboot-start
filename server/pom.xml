@@ -4,38 +4,43 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.5</version>
-    <relativePath/>
+    <groupId>goldenbean.github.com</groupId>
+    <artifactId>springboot-start-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>goldenbean.github.com</groupId>
-  <artifactId>springboot-start</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-
+  <artifactId>springboot-start-server</artifactId>
 
   <properties>
 
-    <livy.version>0.7.2-incubating-SNAPSHOT</livy.version>
-    <scala.binary.version>2.11</scala.binary.version>
-    <java.version>1.8</java.version>
-    <jackson.version>2.9.9</jackson.version>
-    <kryo.version>2.22</kryo.version>
-    <netty.version>4.1.17.Final</netty.version>
-    <commons-codec.version>1.9</commons-codec.version>
-    <kryo.version>2.22</kryo.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <logback-classic-version>1.2.3</logback-classic-version>
   </properties>
 
   <dependencies>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>goldenbean.github.com</groupId>
       <artifactId>springboot-start-util</artifactId>
@@ -47,38 +52,30 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
-
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
-      <version>${logback-classic-version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${logback-classic-version}</version>
     </dependency>
-
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -92,6 +89,14 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
