@@ -1,21 +1,32 @@
 package livy;
 
+import demo.util.JsonUtil;
 import demo.util.http.HttpRequest;
 import demo.util.http.RestResult;
 import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
-import livy.DriverService;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import retrofit2.Response;
 
 public class HttpRequestTests {
+  private static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 
-  public static void main(String[] args) {
+  @Test
+  public void testConnection() {
 
     RemoteDriverAddress remoteDriverAddress = new RemoteDriverAddress(
         "add", 123, "bcd", "def");
+    remoteDriverAddress.setCanonicalHostName("CanonicalHostName");
+    remoteDriverAddress.setHostName("hostname");
 
-    DriverService driverService = HttpRequest.buildRequest("http://hadoop-3:8080/").create(
-        DriverService.class);
+    JsonUtil.prettyPrint(remoteDriverAddress);
 
+    JsonUtil.prettyPrint(RestResult.success("Hello"));
+
+    DriverService driverService = HttpRequest
+        .buildRequest("http://localhost:8998/")
+        .create(DriverService.class);
 
     try {
       Response<RestResult> response = driverService.createDriver(remoteDriverAddress).execute();
