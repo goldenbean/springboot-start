@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>goldenbean.github.com</groupId>
+  <artifactId>springboot-start-livy</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+
+  <properties>
+    <java.version>1.8</java.version>
+    <jackson.version>2.11.4</jackson.version>
+    <slf4j.version>1.7.30</slf4j.version>
+    <logback-classic-version>1.2.3</logback-classic-version>
+    <junit.version>4.12</junit.version>
+
+    <livy.version>0.7.2-incubating-SNAPSHOT</livy.version>
+    <scala.binary.version>2.11</scala.binary.version>
+    <java.version>1.8</java.version>
+    <jackson.version>2.9.9</jackson.version>
+    <kryo.version>2.22</kryo.version>
+    <netty.version>4.1.17.Final</netty.version>
+    <commons-codec.version>1.9</commons-codec.version>
+    <kryo.version>2.22</kryo.version>
+    <slf4j.version>1.7.30</slf4j.version>
+    <logback-classic-version>1.2.3</logback-classic-version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>goldenbean.github.com</groupId>
+      <artifactId>springboot-start-util</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.squareup.retrofit2</groupId>
+          <artifactId>converter-gson</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.apache.livy</groupId>-->
+    <!--      <artifactId>livy-remote</artifactId>-->
+    <!--      <version>${livy.version}</version>-->
+    <!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.apache.livy</groupId>
+      <artifactId>livy-rsc</artifactId>
+      <version>${livy.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.livy</groupId>
+      <artifactId>livy-repl_${scala.binary.version}</artifactId>
+      <version>${livy.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.livy</groupId>
+      <artifactId>livy-core_${scala.binary.version}</artifactId>
+      <version>${livy.version}</version>
+      <exclusions>
+        <!-- Provided and shaded by livy-rsc already. -->
+        <exclusion>
+          <groupId>org.apache.livy</groupId>
+          <artifactId>livy-client-common</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.livy</groupId>
+      <artifactId>livy-core_${scala.binary.version}</artifactId>
+      <version>${livy.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.esotericsoftware.kryo</groupId>
+      <artifactId>kryo</artifactId>
+      <version>${kryo.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons-codec.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--      <artifactId>jackson-annotations</artifactId>-->
+    <!--      <version>${jackson.version}</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--      <artifactId>jackson-core</artifactId>-->
+    <!--      <version>${jackson.version}</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--      <artifactId>jackson-databind</artifactId>-->
+    <!--      <version>${jackson.version}</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.fasterxml.jackson.module</groupId>-->
+    <!--      <artifactId>jackson-module-scala_${scala.binary.version}</artifactId>-->
+    <!--      <version>${jackson.version}</version>-->
+    <!--    </dependency>-->
+
+
+<!--    <dependency>-->
+<!--      <groupId>com.squareup.retrofit2</groupId>-->
+<!--      <artifactId>retrofit</artifactId>-->
+<!--      <version>2.9.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.squareup.retrofit2</groupId>-->
+<!--      <artifactId>converter-gson</artifactId>-->
+<!--      <version>2.9.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.squareup.retrofit2</groupId>-->
+<!--      <artifactId>converter-protobuf</artifactId>-->
+<!--      <version>2.9.0</version>-->
+<!--    </dependency>-->
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <type>jar</type>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+  </build>
+
+</project>

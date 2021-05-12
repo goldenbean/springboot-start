@@ -3,6 +3,7 @@ package livy;
 import demo.util.http.HttpRequest;
 import demo.util.http.RestResult;
 import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
+import livy.DriverService;
 import retrofit2.Response;
 
 public class HttpRequestTests {
@@ -11,7 +12,11 @@ public class HttpRequestTests {
 
     RemoteDriverAddress remoteDriverAddress = new RemoteDriverAddress(
         "add", 123, "bcd", "def");
-    DriverService driverService = HttpRequest.buildRequest("http://hadoop-3:8080/").create(DriverService.class);
+
+    DriverService driverService = HttpRequest.buildRequest("http://hadoop-3:8080/").create(
+        DriverService.class);
+
+
     try {
       Response<RestResult> response = driverService.createDriver(remoteDriverAddress).execute();
 

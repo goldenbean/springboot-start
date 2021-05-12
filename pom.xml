@@ -26,6 +26,7 @@
   <modules>
     <module>server</module>
     <module>util</module>
+    <module>livy</module>
   </modules>
   <dependencyManagement>
     <dependencies>
