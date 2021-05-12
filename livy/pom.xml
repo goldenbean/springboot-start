@@ -4,28 +4,21 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>goldenbean.github.com</groupId>
-  <artifactId>springboot-start-livy</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <parent>
+    <groupId>goldenbean.github.com</groupId>
+    <artifactId>springboot-start-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
 
+  <artifactId>springboot-start-livy</artifactId>
 
   <properties>
-    <java.version>1.8</java.version>
-    <jackson.version>2.11.4</jackson.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <logback-classic-version>1.2.3</logback-classic-version>
-    <junit.version>4.12</junit.version>
-
     <livy.version>0.7.2-incubating-SNAPSHOT</livy.version>
     <scala.binary.version>2.11</scala.binary.version>
-    <java.version>1.8</java.version>
-    <jackson.version>2.9.9</jackson.version>
-    <kryo.version>2.22</kryo.version>
+
     <netty.version>4.1.17.Final</netty.version>
     <commons-codec.version>1.9</commons-codec.version>
     <kryo.version>2.22</kryo.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <logback-classic-version>1.2.3</logback-classic-version>
   </properties>
 
   <dependencies>
@@ -118,26 +111,25 @@
     <!--    </dependency>-->
 
 
-<!--    <dependency>-->
-<!--      <groupId>com.squareup.retrofit2</groupId>-->
-<!--      <artifactId>retrofit</artifactId>-->
-<!--      <version>2.9.0</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>com.squareup.retrofit2</groupId>-->
-<!--      <artifactId>converter-gson</artifactId>-->
-<!--      <version>2.9.0</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>com.squareup.retrofit2</groupId>-->
-<!--      <artifactId>converter-protobuf</artifactId>-->
-<!--      <version>2.9.0</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.squareup.retrofit2</groupId>-->
+    <!--      <artifactId>retrofit</artifactId>-->
+    <!--      <version>2.9.0</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.squareup.retrofit2</groupId>-->
+    <!--      <artifactId>converter-gson</artifactId>-->
+    <!--      <version>2.9.0</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.squareup.retrofit2</groupId>-->
+    <!--      <artifactId>converter-protobuf</artifactId>-->
+    <!--      <version>2.9.0</version>-->
+    <!--    </dependency>-->
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
       <type>jar</type>
       <scope>test</scope>
     </dependency>
@@ -145,7 +137,16 @@
   </dependencies>
 
   <build>
-
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 
 </project>
