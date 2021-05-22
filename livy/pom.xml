@@ -17,6 +17,7 @@
     <netty.version>4.1.17.Final</netty.version>
     <commons-codec.version>1.9</commons-codec.version>
     <kryo.version>2.22</kryo.version>
+    <scala.binary.version>2.11</scala.binary.version>
   </properties>
 
   <dependencies>

@@ -5,6 +5,7 @@ import org.apache.livy.rsc.ContextInfo;
 import org.apache.livy.rsc.RSCClient;
 import org.apache.livy.rsc.RSCConf;
 import org.apache.livy.rsc.ReplJobResults;
+import org.apache.livy.rsc.http.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

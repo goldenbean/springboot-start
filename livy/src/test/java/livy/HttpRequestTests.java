@@ -4,6 +4,7 @@ import demo.util.JsonUtil;
 import demo.util.http.HttpRequest;
 import demo.util.http.RestResult;
 import org.apache.livy.rsc.BaseProtocol.RemoteDriverAddress;
+import org.apache.livy.rsc.http.DriverService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ public class HttpRequestTests {
       RestResult restResult = response.body();
       System.out.println(restResult);
       System.out.println(restResult.getData().toString());
+
     } catch (Throwable th) {
       System.err.println(th);
     }

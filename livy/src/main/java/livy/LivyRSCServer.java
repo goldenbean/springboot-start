@@ -13,7 +13,7 @@ import org.apache.livy.rsc.rpc.RegistrationHandlerV2;
 import org.apache.livy.rsc.rpc.RpcServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.apache.livy.rsc.http.Constants;
 public class LivyRSCServer {
 
   private static final Logger logger = LoggerFactory.getLogger(LivyRSCClient.class);

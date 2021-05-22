@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.concurrent.Future;
 import org.apache.livy.rsc.driver.Statement;
+import org.apache.livy.rsc.http.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +16,8 @@ public class LivyRSCClientTests {
       .enable(SerializationFeature.INDENT_OUTPUT);
 
   public static void main(String[] args) throws Exception {
-    String clientId = "9701cb86-fbaa-491f-8d6e-c8f879411ea3";
-    String remoteAddress = "10.58.10.198";
+    String clientId = "c92c201d-bf8e-4d0c-87ec-3503a16e7c0e";
+    String remoteAddress = "10.244.25.153";
     int remotePort = 10000;
 
     LivyRSCClient client = LivyRSCClient.create(remoteAddress, remotePort, clientId);
