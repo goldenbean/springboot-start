@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: gateway
+  name: livy-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: livy-server
+  template:
+    metadata:
+      labels:
+        app: livy-server
+    spec:
+      containers:
+        - name: livy-server
+          image: 10.58.10.201:55000/livy-server
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "4000m"
+              memory: "4096Mi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: gateway
+  name: livy-server-svc
+spec:
+  clusterIP: None
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: livy-server
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: gateway
+  name: livy-server-node-svc
+  annotations:
+    kube-router.io/service.scheduler: rr
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 28080
+      protocol: TCP
+  selector:
+    app: livy-server

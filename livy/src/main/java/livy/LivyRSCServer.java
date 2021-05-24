@@ -9,11 +9,12 @@ import org.apache.livy.rsc.ContextInfo;
 import org.apache.livy.rsc.FutureListener;
 import org.apache.livy.rsc.RSCConf;
 import org.apache.livy.rsc.Utils;
+import org.apache.livy.rsc.http.Constants;
 import org.apache.livy.rsc.rpc.RegistrationHandlerV2;
 import org.apache.livy.rsc.rpc.RpcServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.livy.rsc.http.Constants;
+
 public class LivyRSCServer {
 
   private static final Logger logger = LoggerFactory.getLogger(LivyRSCClient.class);
