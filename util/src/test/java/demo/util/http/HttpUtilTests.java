@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import org.junit.Test;
 
-public class HttpUtilTest {
+public class HttpUtilTests {
 
   @Test
   public void testFindLocalAddress() throws IOException {

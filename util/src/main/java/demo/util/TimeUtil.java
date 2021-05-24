@@ -1,5 +1,6 @@
 package demo.util;
 
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,10 @@ public class TimeUtil {
     } catch (InterruptedException ex) {
       logger.warn("", ex);
     }
+  }
+
+  public static long getTimeStamp() {
+    return Instant.now().getEpochSecond();
   }
 
 }
