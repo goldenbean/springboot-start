@@ -5,6 +5,7 @@ import java.util.Optional;
 import livy.LivyRSCClient;
 import livy.SubmitRequest;
 import org.apache.livy.rsc.ReplJobResults;
+import org.apache.livy.rsc.driver.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class LivyController {
 //  }
 
   @GetMapping("/submit")
-  public Integer submit(@RequestBody SubmitRequest request) throws Exception {
+  public Statement submit(@RequestBody SubmitRequest request) {
 
     try {
       logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
@@ -48,16 +49,20 @@ public class LivyController {
           .getLivyRSCClient(request.getRemoteDriverAddress());
 
       if (client.isPresent()) {
-        return client.get().submitReplCode(request.getCode()).get();
+        int id = client.get().submitReplCode(request.getCode()).get();
+        ReplJobResults ret = client.get().getReplJobResults(id).get();
+        if (ret.statements.length > 1) {
+          return ret.statements[0];
+        }
       }
     } catch (Exception ex) {
 
     }
-    return -1;
+    return null;
   }
 
   @GetMapping("/statement")
-  public ReplJobResults statement(@RequestBody SubmitRequest request) throws Exception {
+  public ReplJobResults statement(@RequestBody SubmitRequest request) {
 
     try {
       logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
