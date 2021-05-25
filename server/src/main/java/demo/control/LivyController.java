@@ -41,33 +41,67 @@ public class LivyController {
 
   @GetMapping("/submit")
   public Integer submit(@RequestBody SubmitRequest request) throws Exception {
-    logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
 
-    Optional<LivyRSCClient> client = LivyRSCClient
-        .getLivyRSCClient(request.getRemoteDriverAddress());
+    try {
+      logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
+      Optional<LivyRSCClient> client = LivyRSCClient
+          .getLivyRSCClient(request.getRemoteDriverAddress());
 
-    if (client.isPresent()) {
-      return client.get().submitReplCode(request.getCode()).get();
+      if (client.isPresent()) {
+        return client.get().submitReplCode(request.getCode()).get();
+      }
+    } catch (Exception ex) {
+
     }
-
     return -1;
   }
 
   @GetMapping("/statement")
   public ReplJobResults statement(@RequestBody SubmitRequest request) throws Exception {
-    logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
 
-    Optional<LivyRSCClient> client = LivyRSCClient
-        .getLivyRSCClient(request.getRemoteDriverAddress());
+    try {
+      logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
+      Optional<LivyRSCClient> client = LivyRSCClient
+          .getLivyRSCClient(request.getRemoteDriverAddress());
 
-    if (client.isPresent()) {
-      ReplJobResults ret =  client.get().getReplJobResults().get();
-      logger.info("ReplJobResults: {}", JsonUtil.toJson(ret));
-      return ret;
+      if (client.isPresent()) {
+        ReplJobResults ret;
+
+        if (request.getStatementId() > 0) {
+          ret = client.get().getReplJobResults(request.getStatementId()).get();
+        } else {
+          ret = client.get().getReplJobResults().get();
+        }
+
+        logger.info("ReplJobResults: {}", JsonUtil.toJson(ret));
+        return ret;
+      }
+
+    } catch (Exception ex) {
+
     }
-
     return null;
   }
 
+
+  @GetMapping("/cancel")
+  public Integer cancel(@RequestBody SubmitRequest request) {
+
+    try {
+      logger.info("SubmitRequest: {}", JsonUtil.toJson(request));
+      Optional<LivyRSCClient> client = LivyRSCClient
+          .getLivyRSCClient(request.getRemoteDriverAddress());
+
+      if (client.isPresent()) {
+        if (request.getStatementId() > 0) {
+          client.get().cancelReplCode(request.getStatementId());
+          return 0;
+        }
+      }
+    } catch (Exception ex) {
+
+    }
+    return -1;
+  }
 
 }

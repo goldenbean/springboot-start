@@ -6,6 +6,7 @@ public class SubmitRequest {
 
   private RemoteDriverAddress remoteDriverAddress;
   private String code;
+  private int statementId;
 
   public SubmitRequest() {
 
@@ -26,5 +27,13 @@ public class SubmitRequest {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+  public int getStatementId() {
+    return statementId;
+  }
+
+  public void setStatementId(int statementId) {
+    this.statementId = statementId;
   }
 }

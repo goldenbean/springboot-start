@@ -79,11 +79,18 @@ public class LivyRSCClient {
 
   public Future<Integer> submitReplCode(String code) throws Exception {
     return client.submitReplCode(code, "pyspark");
-
   }
 
   public Future<ReplJobResults> getReplJobResults() throws Exception {
     return client.getReplJobResults();
+  }
+
+  public Future<ReplJobResults> getReplJobResults(int statementId) throws Exception {
+    return client.getReplJobResults(statementId, 1);
+  }
+
+  public void cancelReplCode(int statementId) throws Exception {
+    client.cancelReplCode(statementId);
   }
 
 
