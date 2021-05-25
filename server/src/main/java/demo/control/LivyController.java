@@ -51,14 +51,14 @@ public class LivyController {
       if (client.isPresent()) {
         int id = client.get().submitReplCode(request.getCode()).get();
         ReplJobResults ret = client.get().getReplJobResults(id).get();
-        if (ret.statements.length > 1) {
+        if (ret.statements.length > 0) {
           return ret.statements[0];
         }
       }
     } catch (Exception ex) {
 
     }
-    return null;
+    return new Statement();
   }
 
   @GetMapping("/statement")
