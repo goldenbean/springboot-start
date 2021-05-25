@@ -50,7 +50,7 @@ public class LivyController {
       return client.get().submitReplCode(request.getCode()).get();
     }
 
-    return null;
+    return -1;
   }
 
   @GetMapping("/statement")
@@ -61,7 +61,9 @@ public class LivyController {
         .getLivyRSCClient(request.getRemoteDriverAddress());
 
     if (client.isPresent()) {
-      return client.get().getReplJobResults().get();
+      ReplJobResults ret =  client.get().getReplJobResults().get();
+      logger.info("ReplJobResults: {}", JsonUtil.toJson(ret));
+      return ret;
     }
 
     return null;
