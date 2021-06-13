@@ -24,7 +24,9 @@
   <modules>
     <module>server</module>
     <module>util</module>
+    <module>spi</module>
   </modules>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
